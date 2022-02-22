@@ -2,22 +2,19 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { User } from './auth/user.entity';
-import { CategorieModule } from './categorie/categorie.module';
 
 @Module({
-  imports: [AuthModule,
-  TypeOrmModule.forRoot({
+  imports: [
+    AuthModule,
+    TypeOrmModule.forRoot({
+      name: 'default',
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'test',
-      autoLoadEntities: true,
+      url: 'postgres://lonqnzct:Zl5qVBy6LVIldmBUxtqkmVdcmmf_gh4E@arjuna.db.elephantsql.com/lonqnzct',
       synchronize: true,
-      entities:[User],
-  }),
-    CategorieModule,
+      logging: true,
+      autoLoadEntities: true,
+      entities: [User],
+    }),
   ],
 })
 export class AppModule {}
